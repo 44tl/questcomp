@@ -1,132 +1,76 @@
-# Discord Quest Completer (with optional auto-claim)
+# Discord Quest Completer
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Join Discord](https://img.shields.io/badge/Join%20Discord-5865F2?logo=discord&logoColor=white&style=flat)](https://discord.gg/XarwTmZ3dW)
+[![Join Discord](https://img.shields.io/badge/Join%20Discord-5865F2?logo=discord&logoColor=white&style=flat)](https://discord.gg/cqX6eAmcrp)
 
-If this helped you farm some orbs - drop a ⭐ so others find it easier.
+A lightweight, streamlined utility for the Discord desktop developer console designed to accelerate the completion of promotional Quests. If this tool saves you time, please consider dropping a ⭐ on the repository.
 
-**What is this?**  
-This is a tiny JavaScript code you paste into Discord's hidden developer console.  
-It helps you finish Discord's "Quests" (those limited-time tasks like "watch 30 minutes of video" or "play X game for 2 hours") way faster - or at least without actually doing the boring parts.
+---
 
-**What it actually does (in simple words):**
-- For **video watching quests** → it fakes that you've been watching the whole time → usually finishes in 5–15 minutes instead of waiting real time
-- For **play a game** quests → it tricks Discord into thinking you're running the game right now (even if you're not)
-- For **stream a game** quests → it pretends you're streaming in voice chat (you still need to actually start a stream though)
-- For **embedded activity** quests (like play something inside Discord) → it sends fake "I'm playing" signals every ~20 seconds
-- When 100% done → it can automatically click "Claim reward" for you (but see warnings below!)
+### ⚡ Core Functionality
 
-You **must** accept the quest yourself in the app first.  
-You **must** wait the real advertised time for non-video quests (script just keeps the progress ticking without you playing/streaming).
+This script automates the background progress of Discord Quests, eliminating the need to manually execute the required tasks.
 
-**Current status (January 17, 2026):**  
-Still working on official Discord desktop app (stable, PTB, Canary).  
-Browser / Vesktop / ArmCord → only video quests usually work. Game/stream/activity need real desktop client.
+* **Video Quests:** Simulates continuous watch time, typically completing the requirement in 5–15 minutes instead of real-time.
+* **Game Quests:** Emulates an active game presence, tricking the client into registering playtime even if the application is closed.
+* **Stream Quests:** Simulates an active broadcast state within a voice channel (requires initiating a standard stream first).
+* **Embedded Activities:** Transmits automated activity payloads every ~20 seconds to maintain an active session.
+* **Auto-Claim (Optional):** Automatically interacts with the reward claim endpoint upon reaching 100% completion.
 
-## ⚠️ VERY IMPORTANT WARNINGS – READ BEFORE USING ⚠️
+*Note: You must manually accept the quest within the Discord client first. Non-video quests require you to wait the advertised duration, though the script handles the progress ticking automatically.*
 
-**This is against Discord's rules**  
-Faking activity / automating progress = violation of ToS (section on "integrity of service" and automation).  
-If Discord catches you → permanent ban possible (especially on main account).
+---
 
-**Ban risk reality check (2026):**
-- Single account, 1–3 quests per week → almost nobody banned yet
-- Mass farming (10+ quests/day), nitro abuse, public bragging → much higher risk
-- No big ban waves reported for this exact script yet - but Discord can add detection any Tuesday
+### ⚠️ Risk & Compliance
 
-**Auto-claim is extra risky**
-The script now tries to auto-claim rewards when finished.  
-**Problems this can cause:**
-- Triggers CAPTCHA → claim fails → you have to do it manually anyway
-- Makes your account look more automated → slightly higher ban chance
-- Sometimes the claim endpoint just silently fails
+**Usage of this utility violates Discord's Terms of Service.**
+Automating service interactions and spoofing activity states falls under violations of service integrity. 
 
-**Safe option for your main account:**  
-Open the script file → find the 3 lines that contain `/claim-reward` → put `//` in front of each one → save → now it only finishes progress, you claim by hand.
+* **Ban Risk:** While mass bans for this specific method are currently rare for casual users (1–3 quests weekly), aggressive farming, Nitro abuse, or public bragging significantly increases your risk of a permanent account suspension.
+* **Auto-Claim Risks:** The auto-claim variant is inherently riskier. It may trigger CAPTCHA challenges, causing the silent failure of the claim endpoint and flagging the account with bot-like behavior.
+* **Best Practices:** Utilize an alternate account for farming. Do not exceed 2–4 quests daily. Never share screenshots of automated rewards on public forums. 
 
-**Best practice:**  
-- Use an alt account for testing / farming
-- Don't do more than 2–4 quests per day
-- Never post screenshots of rewards from this script publicly
+*For optimal safety on a primary account, use the standard manual-claim script.*
 
-## How to use (step-by-step – no coding knowledge needed)
+---
 
-1. Download and open the **official Discord desktop app**  
-   → https://discord.com/download (Windows / Mac / Linux)
+### 🛠️ Execution Guide
 
-2. In Discord go to left sidebar → **Discover** tab → **Quests** section  
-   → accept the quest(s) you want to complete
+No prior coding experience is required. Follow these steps precisely:
 
-3. Press these keys at the same time: **Ctrl + Shift + I**  
-   → a developer tools window pops up (black/dark background)
+1.  **Environment:** Ensure you are running the official Discord desktop application (Windows 11, macOS, or Linux). *Browser environments and custom clients (Vesktop, ArmCord) generally only support video quests.*
+2.  **Activation:** Navigate to **Discover > Quests** in the Discord sidebar and accept your desired quest.
+3.  **Console Access:** Press `Ctrl + Shift + I` to open the Developer Tools. Navigate to the **Console** tab.
+4.  **Bypass Restrictions:** If you receive a warning that pasting is disabled, type `allow pasting` and press Enter.
+5.  **Inject Script:** Copy the entirety of either `quest-completer.js` (Recommended) or `quest-completer-with-auto-claim.js`. Right-click within the Console, select Paste, and press Enter.
+6.  **Monitor:** The script initializes immediately. Monitor the console output for progress logs (e.g., `Play progress: 1245/3600`).
+7.  **Completion:** Once the console indicates completion, verify your reward in the Quests tab. If auto-claim fails or prompts a CAPTCHA, claim the reward manually.
 
-4. Click the **Console** tab (usually top row, looks like a black box)
+*Special Instruction for Stream Quests: You must join a voice channel with at least one other user and begin sharing your screen (any application will suffice) for the script to properly log time.*
 
-5. If you see a message like "pasting is disabled" → type exactly this and press Enter:  
-   `allow pasting`
+---
 
-6. Copy **all** the code from one of these files:  
-   - Basic version (manual claim only): [`quest-completer.js`](./quest-completer.js)  
-   - Version with auto-claim (riskier): [`quest-completer-with-auto-claim.js`](./quest-completer-with-auto-claim.js)
+### ❓ Frequently Asked Questions
 
-7. Right-click inside the Console window → Paste → press Enter
+**The console returns red error text. What went wrong?**
+This is typically caused by using an unsupported client or an incomplete copy-paste. Restart the official Discord desktop application and try again. If the stable build fails, try Discord PTB or Canary.
 
-8. The script starts working immediately - watch the messages it prints  
-   Example:  
-   → Starting "Watch 30 min of video" - 0/1800s  
-   → Play progress: 1245/3600  
-   → Finished video quest → Auto-claimed (or Claim failed)
+**Ctrl+Shift+I opens a screenshot tool instead of the console.**
+Your GPU software (e.g., AMD Radeon or NVIDIA GeForce Experience) has bound this shortcut globally. Disable the conflicting hotkey in your graphics control panel.
 
-9. Special case - **stream** quests only:  
-   - Join any voice channel that has **at least 1 other real person** (friend or your alt)  
-   - Click "Screen" or "Application" and stream **any window** (even notepad)  
-   - Script will count the time while you stream
+**Why does the script identify my custom client (e.g., Vesktop) as a browser?**
+Custom wrappers often lack the native hooks required for game and stream detection. You must use the official client for non-video quests.
 
-10. Wait until it says "done" or "completed"  
-    → Go to Quests tab → see if reward is claimed  
-    → If not (or CAPTCHA appeared) → just click the Claim button yourself
+**Can the script automatically accept new quests?**
+No. The acceptance endpoint frequently triggers a CAPTCHA, making automation too risky and unreliable.
 
-Video quests → fast (5–20 min)  
-Game / stream / activity → takes the **exact time** shown in the quest (10 min = ~10 min wait)
+**Is there a BetterDiscord or Vencord plugin version?**
+Community ports exist (search for "QuestAuto"), but standard plugins often update slower than this raw script when Discord patches their API.
 
-## FAQ – real questions people ask
+---
 
-**Q: Why doesn't it work / I get red error text?**  
-A: 99% of time: not using official desktop app, or copy-paste went wrong. Restart Discord, try again. Use PTB/Canary if stable is broken.
+### ⚖️ Disclaimer
 
-**Q: Ctrl+Shift+I opens screenshot tool instead?**  
-A: Your GPU software (AMD Radeon, NVIDIA GeForce Experience) stole the shortcut. Disable hotkeys in that program.
+This repository is maintained for **educational and research purposes only**. The authors are not affiliated with Discord Inc. You assume all responsibility and liability for any account suspensions, bans, or data loss that may occur from utilizing these scripts. 
 
-**Q: I'm using Vesktop / custom client – why does it say browser?**  
-A: Vesktop etc. are fancy wrappers but miss important parts → game/stream won't work. Switch to official Discord.
-
-**Q: Auto-claim gave me CAPTCHA / didn't work?**  
-A: Expected. Just claim manually. That's why manual claim is safer on main.
-
-**Q: Can it start/accept quests automatically?**  
-A: No – accepting almost always shows CAPTCHA now. Too risky anyway.
-
-**Q: Expired quest – can I finish it?**  
-A: No. Server says no.
-
-**Q: How many quests can I do?**  
-A: Script does one after another automatically. But don't do 20/day – looks suspicious.
-
-**Q: Is there a plugin version (Vencord / BetterDiscord)?**  
-A: Yes – search GitHub for "Discord Quest Completer Vencord" or "QuestAuto". But plugins update slower – this raw script is fastest to fix when Discord breaks it.
-
-**Q: Will Discord detect this in 2026?**  
-A: Possible anytime. No mass bans yet for this method, but keep it low-key.
-
-**Disclaimer:**  
-This is shared for **educational purposes only**.  
-Using it violates Discord's Terms of Service.  
-If you get banned, flagged, or lose your account → that's 100% your responsibility.  
-No warranties. No guarantees it keeps working tomorrow.
-
-No affiliation with Discord Inc. whatsoever.
-
-Made with ❤️ by emy who likes to poke at how software works :)
-
-**Stay safe, use alts, don't get greedy.**  
-Happy questing (responsibly).
+Made with ❤️ by Emy (0m2@discord) who likes to poke at how software works.
