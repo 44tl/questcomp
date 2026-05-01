@@ -5,6 +5,9 @@
 
 A lightweight, streamlined utility for the Discord desktop developer console designed to accelerate the completion of promotional Quests. If this tool saves you time, please consider dropping a ⭐ on the repository.
 
+> [!WARNING]
+> **CRITICAL NOTICE: As of April 7th 2026, Discord has expressed their intent to crack down on automating quest completion. Use this script at your own risk, as you most likely WILL get flagged by doing so.**
+
 ---
 
 ### ⚡ Core Functionality
@@ -73,4 +76,4 @@ Community ports exist (search for "QuestAuto"), but standard plugins often updat
 
 This repository is maintained for **educational and research purposes only**. The authors are not affiliated with Discord Inc. You assume all responsibility and liability for any account suspensions, bans, or data loss that may occur from utilizing these scripts. 
 
-Made with ❤️ by Emy (0m2@discord) who likes to poke at how software works.
+Made with ❤️ by Emy (ciuqe @ discord) who likes to poke at how software works.
